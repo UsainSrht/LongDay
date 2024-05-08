@@ -1,0 +1,4 @@
+name: LongDay
+version: '${project.version}'
+main: me.usainsrht.longday.LongDay
+api-version: '1.20'
