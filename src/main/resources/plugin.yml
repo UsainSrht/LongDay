@@ -1,4 +1,6 @@
 name: LongDay
 version: '${project.version}'
 main: me.usainsrht.longday.LongDay
-api-version: '1.20'
+api-version: '1.13'
+author: UsainSrht
+description: Makes days last 1.5x longer while making nights 2x shorter.
