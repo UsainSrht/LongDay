@@ -1,5 +1,6 @@
 package me.usainsrht.longday;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,13 +13,14 @@ public final class LongDay extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new Metrics(this, 32418);
         taskIDs = new HashMap<>();
 
         Bukkit.getScheduler().runTaskLater(this, () -> {
             //start timers when server is fully loaded.
             for (World world : Bukkit.getWorlds()) {
                 if (world.getEnvironment() == World.Environment.NETHER || world.getEnvironment() == World.Environment.THE_END) continue;
-                if (!Boolean.parseBoolean(world.getGameRuleValue("doDaylightCycle"))) continue;
+                if (!isDaylightCycleEnabled(world)) continue;
                 int taskID = Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
                     int i = 0;
                     @Override
@@ -44,5 +46,16 @@ public final class LongDay extends JavaPlugin {
         taskIDs.values().forEach(Bukkit.getScheduler()::cancelTask);
     }
 
+    private static boolean isDaylightCycleEnabled(World world) {
+        String advanceTime = world.getGameRuleValue("advance_time");
+        if (advanceTime != null) {
+            return Boolean.parseBoolean(advanceTime);
+        }
+        String doDaylightCycle = world.getGameRuleValue("doDaylightCycle");
+        if (doDaylightCycle != null) {
+            return Boolean.parseBoolean(doDaylightCycle);
+        }
+        return true;
+    }
 
 }
