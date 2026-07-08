@@ -1,0 +1,14 @@
+enabled: true
+
+# When true, keeps vanilla time advancement and adjusts with setFullTime (can affect redstone / scheduled events).
+# When false, the plugin disables vanilla advancement and moves time forward only.
+rewind-mode: false
+
+# Real-world minutes for each in-game day/night phase (vanilla is 10 minutes each).
+daytime: 15
+nighttime: 5
+
+blacklisted-worlds:
+  - world_nether
+  - world_the_end
+  - vanillaworld
